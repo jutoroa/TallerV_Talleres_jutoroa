@@ -63,6 +63,8 @@ int main(void)
 	varOperadores = varOperadores % 2;
 	varOperadores %= 2;
 
+	// CASTEOOOOOOOOOOOOOOOOOOOOO
+
     /* Loop forever */
 	while(1){
 
