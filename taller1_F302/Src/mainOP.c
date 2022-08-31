@@ -5,6 +5,7 @@
  *      Author: jutoroa
  */
 
+// Este es el código para el manejo de bits.
 
 #include <stdint.h>
 
