@@ -126,6 +126,5 @@ void delay(uint32_t time){
 
 	while(contador <= time){
 		__asm("NOP");
-		contador ++;
 	}
 }
