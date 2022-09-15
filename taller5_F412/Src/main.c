@@ -40,6 +40,7 @@ int main(void){
 	// Desplazemos el puntero 16 bits
 	pVariable++;
 
+	// Guardamos la dirección en una variable
 	uint32_t dir = (uint32_t) pVariable;
 
 	uint16_t nuevoValor = 520;
@@ -48,19 +49,70 @@ int main(void){
 	*pVariable = nuevoValor;
 
 
-}
+	// 2.0 Ejemplo básico arreglo
 
+	#define sizeOfArray  4
 
+	uint8_t miPrimerArreglo[sizeOfArray] = {5, 0xAE, 'a', 254};
 
+	// 2.1 Recorrer un arreglo con ciclos
 
+	uint8_t contenido = 0;
 
-// Función ejercicio 1
-void delay(uint32_t time){
-
-	uint32_t contador = 0;
-
-	while(contador <= time){
-		__asm("NOP");
-		contador ++;
+	for(uint8_t i = 0; i < sizeOfArray; i++){
+		contenido = miPrimerArreglo[i];
 	}
+
+	// 2.2 Recorrer un arreglo con punteros
+
+	for(uint8_t i = 0; i < sizeOfArray; i++){
+		contenido = * (miPrimerArreglo + i);
+	}
+
+	/* Un arreglo es un puntero al primer elemento del arreglo
+
+	 miPrimerArreglo[0] es igual a *miPrimerArreglo
+     miPrimerArreglo[1] es igual a *(miPrimerArreglo + 1).
+
+	*/
+
+	// 2.3 Cambiar valor de un elemento de un arreglo
+
+	miPrimerArreglo[1]	   = 12;
+
+	*(miPrimerArreglo + 1) = 9;		// Ambas notaciones son iguales
+
+	// Consultar la dirección de un arreglo
+	uint32_t dir2 = (uint32_t) miPrimerArreglo;
+
+	// 3.0 Estructuras
+
+	// Definición General:
+
+    typedef struct
+    {
+        uint8_t 	Elemento1;
+        uint16_t 	Elemento2;
+        uint32_t 	Elemento3;
+        uint64_t 	Elemento4;
+        uint8_t		arreglo[sizeOfArray];
+    } miPrimeraEstructura_t;
+
+    // 3.1 Creamos una variable con el tipo de dato de la estructura
+
+    miPrimeraEstructura_t 	estructuraEjemplo = {0};
+
+    // Accedemos a los elementos de la estructura
+
+    estructuraEjemplo.Elemento3 = 'F';
+    estructuraEjemplo.arreglo[0]   = 10;
+
+    // 3.2 Creación de un puntero a una estructura
+
+    // Creamos un puntero que apunta a ese tipo de estructura
+    miPrimeraEstructura_t *ptrMiPrimeraEstructura;
+
+    ptrMiPrimeraEstructura -> Elemento1 	= 9;
+    ptrMiPrimeraEstructura -> arreglo[2] 	= 5;
+
 }
