@@ -33,6 +33,38 @@ void abonarDeudas(uint16_t misDeudas[], uint8_t cantidadDeudas){
 
 }
 
+// ***** // SOLUCION EJERCICIO // ***** //
+
+void stringCaseConverter(uint8_t *string){
+
+	// Creamos un contador
+	uint8_t i = 0;
+
+	// Barremos todos los elementos del string(arreglo) hasta encontrar
+	// el caracter nulo
+	while(string[i] != '\0'){
+
+		// Si el caracter es mayúscula
+		if((*(string + i) > 64) && (*(string + i) < 91)){
+			// Le aumentamos 32 al código ascii
+			*(string + i) = *(string + i) + 32;
+		}
+		// Si el caracter es minúscula
+		else if((*(string + i) > 96) && (*(string + i) < 123)){
+			// Le disminuimos 32 al código ascii
+			*(string + i) = *(string + i) - 32;
+		}
+		// Si el caracter no es una letra
+		else{
+			// Dejamos el mismo caracter
+			*(string + i) = *(string + i);
+		}
+
+		i++;	// Aumentamos el contador
+	}
+
+}
+
 int main(void){
 
 	// Creamos una variable
@@ -62,12 +94,19 @@ int main(void){
 	abonarDeudas(deudasMensuales,5);
 
 	// 1.4 Ejemplo String básico
-	uint8_t miPrimerString[] = "Hola mundo";
+	uint8_t miPrimerString[] = "HolAA MuNNdo";
+
+	// 1.5 EJERCICIO:
+
+	// Crear una función llamada stringCaseConverter que no retorne ningún
+	// valor, y reciba una string.
+
+	// Esta función deberá cambiar las minúsculas por mayúsculas y viceversa
+	// del string original.
 
 
+	// Llamamos la funcion
+	stringCaseConverter(miPrimerString);
 
-
-
-
-
+	n = 0;
 }
