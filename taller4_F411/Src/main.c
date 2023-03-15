@@ -1,5 +1,5 @@
 
-// Taller 4 - Ciclos While y Switch Case
+// Taller 6 - Ciclos While y Switch Case
 
 #include <stdint.h>
 
@@ -10,12 +10,15 @@
 #define MULTIPLICACION	'*'
 #define DIVISION		'/'
 
+
 // FUNCION SWITCH CASE
 uint16_t resultadoOperacion(uint8_t tipoDeOperacion, uint8_t numeroA, uint8_t numeroB);
 
-// FUNCION EJERCICIO #1
-void delay(uint32_t time);
+// Ejercicio #1
+#define FACTORIAL	0
+#define FIBONACCI	1
 
+uint16_t operacionesFunc(uint8_t typeOperation, uint8_t number);
 
 int main(void)
 {
@@ -32,7 +35,6 @@ int main(void)
     uint8_t contador = 0;
 
     while(contador < 10){
-
     	// Diferencia entre While y For
     	contador += 3;
     }
@@ -45,36 +47,25 @@ int main(void)
 
     }*/
 
-    // ACTIVIDAD #1:
-    // Crear una funcion delay, que tome un parámetro y que no retorne nada.
-    // El parámetro que toma debe de mantener ocupado al MCU haciendo nada (NOP).
+    /* ACTIVIDAD #1:
+    Crear una función que tome dos parámetros: 1er parametro deberá indicar el tipo de operación
+    (Factorial, o la sucesión de Fibonacci). El 2do paramétro deberá dar cuenta del número al que
+    se le quiera realizar el factorial, o hallar el n-ésimo término de la sucesión de fibonacci
+   */
 
-    // ACTIVIDAD #2:
-    // Prender y apagar un LED con el delay y la funcion WRITEPIN
+    uint16_t exampleVar;
 
-    GPIO_Handler_t handlerStateLED 			= {0};	// StateLED
+    exampleVar = operacionesFunc(FIBONACCI,0);
+    exampleVar = operacionesFunc(FIBONACCI,1);
+    exampleVar = operacionesFunc(FIBONACCI,2);
+    exampleVar = operacionesFunc(FIBONACCI,3);
+    exampleVar = operacionesFunc(FIBONACCI,10);
+    exampleVar = operacionesFunc(FIBONACCI,14);
+    exampleVar = operacionesFunc(FIBONACCI,20);
 
-	// Configuración el State LED
-	handlerStateLED.pGPIOx								= GPIOA;
-	handlerStateLED.GPIO_PinConfig.GPIO_PinNumber		= PIN_5;
-	handlerStateLED.GPIO_PinConfig.GPIO_PinMode			= GPIO_MODE_OUT;
-	handlerStateLED.GPIO_PinConfig.GPIO_PinOPType		= GPIO_OTYPE_PUSHPULL;
-	handlerStateLED.GPIO_PinConfig.GPIO_PinPuPdControl	= GPIO_PUPDR_NOTHING;
-	handlerStateLED.GPIO_PinConfig.GPIO_PinSpeed		= GPIO_OSPEED_HIGH;
-
-	GPIO_Config(&handlerStateLED);
-
-	while(1){
-		GPIO_WritePin(&handlerStateLED, SET);
-
-		delay(150000);
-
-		GPIO_WritePin(&handlerStateLED, RESET);
-
-		delay(70000);
-
-	}
-
+    exampleVar = operacionesFunc(FACTORIAL,1);
+    exampleVar = operacionesFunc(FACTORIAL,5);
+    exampleVar = operacionesFunc(FACTORIAL,7);
 
 }
 
@@ -88,44 +79,76 @@ uint16_t resultadoOperacion(uint8_t tipoDeOperacion, uint8_t numeroA, uint8_t nu
     case SUMA:
     {
     	resultado = numeroA + numeroB;
-    	return resultado;
     	break;
     }
     case RESTA:
     {
     	resultado = numeroA - numeroB;
-    	return resultado;
     	break;
     }
     case MULTIPLICACION:
     {
     	resultado = numeroA * numeroB;
-    	return resultado;
     	break;
     }
     case DIVISION:
     {
     	resultado = numeroA / numeroB;
-    	return resultado;
     	break;
     }
     default:
     {
     	resultado = 0;
-    	return resultado;
     	break;
     }
 
 	}
+
+	return resultado;
 }
 
 // Función ejercicio 1
-void delay(uint32_t time){
+uint16_t operacionesFunc(uint8_t typeOperation, uint8_t number){
 
-	uint32_t contador = 0;
+	// Creamos una variable para guardar el resultado
+	uint16_t resultado = 0;
 
-	while(contador <= time){
-		__asm("NOP");
-		contador ++;
-	}
+	// Averiguar qué tipo de operación se quiere realizar a través de un switch Case
+	switch(typeOperation){
+
+    case FACTORIAL:
+    {
+    	resultado = 1;			// Iniciamos en 1
+    	uint8_t contador = 1;
+
+    	while(contador <= number){
+    		resultado *= contador;	// Multiplicamos por todos los dígitos anteriores
+    		contador++;				// Aumentamos el contador
+    	}
+
+    	break;
+    }
+    case FIBONACCI:
+    {
+    	// Definimos las variables iniciales
+    	uint16_t nMenos2 = 0, nMenos1 = 1, n = 0, contador = 0;
+    	while (contador < number) {
+    		n = nMenos1 + nMenos2;
+    		nMenos2 = nMenos1;
+    		nMenos1 = n;
+    		contador++;
+    		}
+    	resultado = n;
+    	break;
+    	}
+    default:
+    {
+    	resultado = 0;
+    	break;
+    }
+    }
+
+	return resultado;
+
 }
+
