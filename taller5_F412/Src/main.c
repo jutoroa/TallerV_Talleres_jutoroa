@@ -1,8 +1,7 @@
 
-// Taller 5 - Ciclos While y Switch Case
+// Taller 7 - Punteros
 
 #include <stdint.h>
-
 
 
 int main(void){
@@ -17,6 +16,16 @@ int main(void){
 
 	// Guardamos el valor del dato
 	uint8_t valorDato = *pDato;
+
+	// Explicar CASTEO
+	uint16_t casteoDato = (uint16_t) dato;
+
+	// Creación de un puntero a una dirección específica.
+	// Explicar Memory Mapping | DataSheet
+	uint16_t *punteroDireccion = (uint16_t*) 0x20000001;
+
+	// Cambiar dirección de un puntero
+	punteroDireccion = (uint16_t*) 0x20000005;
 
 	// Guardar el valor de la dirección de memoria.
 	uint32_t direccionDato = (uint32_t) pDato;
@@ -110,9 +119,19 @@ int main(void){
     // 3.2 Creación de un puntero a una estructura
 
     // Creamos un puntero que apunta a ese tipo de estructura
-    miPrimeraEstructura_t *ptrMiPrimeraEstructura;
+    miPrimeraEstructura_t *ptrMiPrimeraEstructura = &estructuraEjemplo;
 
     ptrMiPrimeraEstructura -> Elemento1 	= 9;
     ptrMiPrimeraEstructura -> arreglo[2] 	= 5;
+    *((ptrMiPrimeraEstructura -> arreglo)+2) 	= 36;
+
+    (void) casteoDato;
+    (void) dir;
+    (void) dir2;
+    (void) direccionDato;
+    (void) nuevoDato;
+    (void) punteroDireccion;
+    (void) valorDato;
+    (void) contenido;
 
 }
