@@ -5,30 +5,33 @@
 
 #include "GPIOxDriver.h"
 
-#define SUMA	'+'
-#define RESTA	'-'
-#define MULTIPLICACION	'*'
-#define DIVISION		'/'
+#define SUMA '+'
+#define RESTA '-'
+#define MULTIPLICACION '*'
+#define DIVISION '/'
 
+// Funcion swtich case
+uint16_t resultadoOperacion(uint8_t tipoDeOperacion, uint8_t numeroA,
+		uint8_t numeroB);
 
-// FUNCION SWITCH CASE
-uint16_t resultadoOperacion(uint8_t tipoDeOperacion, uint8_t numeroA, uint8_t numeroB);
-
-// Ejercicio #1
-#define FACTORIAL	0
-#define FIBONACCI	1
+// Ejercicio 1
+#define FACTORIAL 0
+#define FIBONACCI 1
 
 uint16_t operacionesFunc(uint8_t typeOperation, uint8_t number);
 
-int main(void)
-{
-	// Ejemplo Switch Case básico
 
-    uint16_t operacionFinal = 0;
 
-    operacionFinal = resultadoOperacion(SUMA,12,16);
 
-    operacionFinal++;
+
+
+
+
+int main(void){
+
+	uint16_t operacionFinal = 0;
+	operacionFinal = resultadoOperacion(SUMA, 7, 10);
+	operacionFinal++;
 
     // Ejemplo While básico
 
@@ -40,12 +43,6 @@ int main(void)
     }
 
     contador = 0;
-
-    /*
-    // Explicación acciones perpetuas
-    while(1){
-
-    }*/
 
     /* ACTIVIDAD #1:
     Crear una función que tome dos parámetros: 1er parametro deberá indicar el tipo de operación
@@ -66,44 +63,41 @@ int main(void)
     exampleVar = operacionesFunc(FACTORIAL,1);
     exampleVar = operacionesFunc(FACTORIAL,5);
     exampleVar = operacionesFunc(FACTORIAL,7);
-
 }
 
-// Ejemplo Switch Case básico
-uint16_t resultadoOperacion(uint8_t tipoDeOperacion, uint8_t numeroA, uint8_t numeroB){
-
+uint16_t resultadoOperacion(uint8_t tipoDeOperacion, uint8_t numeroA,
+		uint8_t numeroB){
 	uint16_t resultado = 0;
 
 	switch(tipoDeOperacion){
 
-    case SUMA:
-    {
-    	resultado = numeroA + numeroB;
-    	break;
-    }
-    case RESTA:
-    {
-    	resultado = numeroA - numeroB;
-    	break;
-    }
-    case MULTIPLICACION:
-    {
-    	resultado = numeroA * numeroB;
-    	break;
-    }
-    case DIVISION:
-    {
-    	resultado = numeroA / numeroB;
-    	break;
-    }
-    default:
-    {
-    	resultado = 0;
-    	break;
-    }
-
+	case SUMA:
+	{
+		resultado = numeroA + numeroB;
+		break;
+	}
+	case RESTA:
+	{
+		resultado = numeroA - numeroB;
+		break;
+	}
+	case MULTIPLICACION:
+	{
+		resultado = numeroA * numeroB;
+		break;
+	}
+	case DIVISION:
+	{
+		resultado = numeroA / numeroB;
+		break;
+	}
+	default:
+	{
+		resultado = 0;
+		break;
 	}
 
+}
 	return resultado;
 }
 
@@ -151,4 +145,7 @@ uint16_t operacionesFunc(uint8_t typeOperation, uint8_t number){
 	return resultado;
 
 }
+
+
+
 
