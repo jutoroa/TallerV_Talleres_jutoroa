@@ -22,7 +22,7 @@ uint8_t duplicarNumeroReturn(uint8_t numero){
 	return (numero * 2);
 }
 
-// 1.3 Arreglos por
+// 1.3 Arreglos por Referencia
 
 void abonarDeudas(uint16_t misDeudas[], uint8_t cantidadDeudas){
 
