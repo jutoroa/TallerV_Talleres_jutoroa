@@ -52,3 +52,11 @@ void EXTI0_Callback(void){
 	TooglePin(&handlerStateLed);
 }
 
+/* Ejercicio */
+
+/* Genere un programa, que contenga una interrupción del timer 2 para hacer el blinky de un led,
+ * y una interrupción por un EXTI para una fotocompuerta. Cada vez que la fotocompuerta genere
+ * una interrupción, se deberá duplicar el periodo del blinky del led, dado por la interrupción
+ * del timer2
+ * */
+
