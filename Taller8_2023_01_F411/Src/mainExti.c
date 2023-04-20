@@ -33,16 +33,16 @@ void initSystem(void){
 	handlerStateLed.GPIO_PinConfig.GPIO_PinOPType = GPIO_OTYPE_PUSHPULL;
 	handlerStateLed.GPIO_PinConfig.GPIO_PinSpeed = GPIO_OSPEED_HIGH;
 
-	GPIO_Config(&handlerStateLed);
+	fotocompuertaGPIO_Config(&handlerStateLed);
 
 	handlerFotoCompuerta.pGPIOx = GPIOA;
 	handlerFotoCompuerta.GPIO_PinConfig.GPIO_PinNumber = PIN_0;
 	handlerFotoCompuerta.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_IN;
-	handlerFotoCompuerta.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_PUPDR_NOTHING;
+	handlerFotoCompuerta.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_PUPDR_PULLUP;
 	handlerFotoCompuerta.GPIO_PinConfig.GPIO_PinSpeed = GPIO_OSPEED_HIGH;
 
 
-	handlerExti.trigger = TRIGGER_RISING;
+	handlerExti.trigger = TRIGGER_FALLING;
 	handlerExti.pGPIOHandler = &handlerFotoCompuerta;
 
 	EXTI_Config(&handlerExti);
@@ -52,11 +52,5 @@ void EXTI0_Callback(void){
 	TooglePin(&handlerStateLed);
 }
 
-/* Ejercicio */
 
-/* Genere un programa, que contenga una interrupción del timer 2 para hacer el blinky de un led,
- * y una interrupción por un EXTI para una fotocompuerta. Cada vez que la fotocompuerta genere
- * una interrupción, se deberá duplicar el periodo del blinky del led, dado por la interrupción
- * del timer2
- * */
 
